@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-900 antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .leaflet-container::after {
+    display: none;
+  }
+  
+  .marker-cluster {
+    @apply bg-blue-500/20 dark:bg-blue-500/30;
+  }
+  
+  .marker-cluster div {
+    @apply bg-blue-500/40 dark:bg-blue-500/60 text-white font-medium;
+  }
+  
+  .leaflet-control-zoom a {
+    @apply bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200;
+  }
+  
+  .leaflet-routing-container {
+    @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg shadow-lg overflow-hidden;
+  }
+  
+  .leaflet-routing-alt {
+    @apply max-h-40;
+  }
+  
+  .map-container {
+    @apply h-[calc(100vh-3.5rem)];
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-colors duration-200 
+      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
+  }
+  
+  .mobile-menu {
+    @apply fixed inset-y-14 right-0 w-64 bg-white dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out;
+  }
+  
+  .mobile-menu.open {
+    @apply translate-x-0;
+  }
+  
+  .mobile-menu.closed {
+    @apply translate-x-full;
+  }
+  
+  /* Enhanced marker animations */
+  .leaflet-marker-icon {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  .leaflet-marker-icon:hover {
+    @apply scale-110;
+  }
+}

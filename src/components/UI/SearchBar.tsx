@@ -43,7 +43,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onBuildingSelect }) => {
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto" ref={searchRef}>
+    <div className="relative w-full" ref={searchRef}>
       <div className="relative">
         <input
           type="text"
@@ -51,9 +51,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onBuildingSelect }) => {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setIsActive(true)}
           placeholder={t('search')}
-          className="w-full p-2.5 pl-10 pr-10 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:text-white"
+          className="w-full p-2.5 pl-10 pr-10 bg-[#F6F6F6] outline-none dark:bg-[#26272C] rounded-lg shadow-sm text-[#5D5D5D] dark:text-[#A3A3A3]"
         />
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400" size={18} />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#2D318D] dark:text-[#8287FF]" size={18} />
         
         {query && (
           <button 

@@ -32,7 +32,7 @@ const CampusMap: React.FC<CampusMapProps> = ({
 
   return (
     <motion.div
-      className="h-[calc(100vh-64px)] w-full relative z-0"
+      className="h-screen w-full relative z-0"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}

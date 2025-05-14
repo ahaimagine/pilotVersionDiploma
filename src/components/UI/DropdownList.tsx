@@ -27,16 +27,16 @@ const DropdownList: React.FC<DropdownListProps> = ({
   const hasMoreItems = items.length > initialItemsCount;
 
   return (
-    <div className="mb-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+    <div className="dark:border-gray-700 py-[12px] hover:bg-[#E9E9E9] cursor-pointer px-[12px] rounded-[12px] dark:hover:bg-[#34353C]">
       <button
         className="flex justify-between items-center w-full text-left font-semibold text-gray-900 dark:text-white"
         onClick={onToggle}
       >
         <span>{title} ({items.length})</span>
         {isActive ? (
-          <ChevronUp size={20} className="text-gray-600 dark:text-gray-400" />
+          <ChevronUp size={20} className="text-[#2D318D] dark:text-[#8287FF]" />
         ) : (
-          <ChevronDown size={20} className="text-gray-600 dark:text-gray-400" />
+          <ChevronDown size={20} className="text-[#2D318D] dark:text-[#8287FF]" />
         )}
       </button>
       
@@ -47,15 +47,12 @@ const DropdownList: React.FC<DropdownListProps> = ({
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden"
+            className="overflow-visible max-h-[192px] "
           >
             <ul className="mt-3 space-y-3">
               {visibleItems.map((item) => (
                 <li key={item.id} className="pl-3 border-l-2 border-primary-300 dark:border-primary-700">
                   <h4 className="font-medium text-gray-900 dark:text-white">{item.name[lang]}</h4>
-                  {'description' in item && item.description && (
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{item.description[lang]}</p>
-                  )}
                 </li>
               ))}
             </ul>

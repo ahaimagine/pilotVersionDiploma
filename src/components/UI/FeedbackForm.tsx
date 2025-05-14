@@ -45,7 +45,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onClose }) => {
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
-        className="bg-white dark:bg-gray-900 rounded-xl shadow-xl w-full max-w-md"
+        className="bg-[#F6F6F6] dark:bg-[#26272C] rounded-xl shadow-xl w-full max-w-md"
       >
         {isSubmitted ? (
           <div className="p-6 text-center">
@@ -61,7 +61,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onClose }) => {
               </h2>
               <button
                 onClick={onClose}
-                className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                className="p-1 rounded-full hover:bg-[#4A4EB1] transition-colors"
               >
                 <X size={24} className="text-gray-600 dark:text-gray-300" />
               </button>
@@ -82,7 +82,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onClose }) => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full p-2.5 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:text-white"
+                  className="w-full p-2.5 bg-[#E9E9E9] dark:bg-[#34353C] border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm dark:text-white"
                 />
               </div>
 
@@ -100,7 +100,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onClose }) => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full p-2.5 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:text-white"
+                  className="w-full p-2.5 bg-[#E9E9E9] dark:bg-[#34353C] border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm dark:text-white"
                 />
               </div>
 
@@ -118,7 +118,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onClose }) => {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="w-full p-2.5 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:text-white"
+                  className="w-full p-2.5 bg-[#E9E9E9] dark:bg-[#34353C] border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm dark:text-white"
                 ></textarea>
               </div>
 
@@ -132,7 +132,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onClose }) => {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#2D318D] hover:bg-[#4A4EB1] dark:bg-[#8287FF] text-white rounded-lg transition-colors"
                 >
                   {t('submit')}
                 </button>

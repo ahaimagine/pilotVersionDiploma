@@ -32,6 +32,7 @@ function App() {
   const [selectedBuilding, setSelectedBuilding] = useState<Building | null>(null);
   const [showRoute, setShowRoute] = useState(false);
   const [showDetails, setShowDetails] = useState(true);
+  
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -71,9 +72,9 @@ function App() {
       <I18nextProvider i18n={i18n}>
         <ThemeProvider>
           <LanguageProvider>
-            <div className="flex flex-col h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+            <div className="h-screen text-gray-900 dark:text-gray-100">
               <Header onBuildingSelect={setSelectedBuilding} />
-              <main className="flex-1 relative">
+              <main className="flex-1 relative h-screen">
                 <CampusMap
                   onBuildingSelect={handleChangeBuilding}
                   selectedBuilding={selectedBuilding}
@@ -85,6 +86,7 @@ function App() {
                     building={selectedBuilding}
                     onClose={handleClosePanel}
                     onBuildRoute={() => handleBuildRoute(selectedBuilding)}
+                    setDetails={setShowDetails}
                   />
                 )}
               </main>

@@ -22,10 +22,10 @@ const BurgerMenu: React.FC = () => {
     <div className="relative shadow-xl">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 rounded-md hover:bg-[#E9E9E9] dark:hover:bg-[#34353C] bg-[#F6F6F6] dark:bg-[#26272C]"
+        className="h-[48px] w-[48px] flex content-center flex-wrap justify-center p-2 rounded-md hover:bg-[#E9E9E9] dark:hover:bg-[#34353C] bg-[#F6F6F6] dark:bg-[#26272C]"
         aria-label="Menu"
       >
-        <Menu className="text-gray-800 dark:text-white" size={24} />
+        <Menu className="text-gray-800 dark:text-white" size={28} />
       </button>
 
       <AnimatePresence>

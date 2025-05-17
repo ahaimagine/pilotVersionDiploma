@@ -51,7 +51,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onBuildingSelect }) => {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setIsActive(true)}
           placeholder={t('search')}
-          className="w-full p-2.5 pl-10 pr-10 bg-[#F6F6F6] outline-none dark:bg-[#26272C] rounded-lg shadow-sm text-[#5D5D5D] dark:text-[#A3A3A3]"
+          className="w-full h-[48px] p-2.5 pl-10 pr-10 bg-[#F6F6F6] outline-none dark:bg-[#26272C] rounded-lg shadow-sm text-[#5D5D5D] dark:text-[#A3A3A3]"
         />
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#2D318D] dark:text-[#8287FF]" size={18} />
         

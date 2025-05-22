@@ -13,9 +13,10 @@ interface DetailPanelProps {
   onClose: () => void;
   onBuildRoute: () => void;
   setDetails: (value: boolean) => void;
+  setBuilding: (value: Building | null) => void;
 }
 
-const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRoute, setDetails }) => {
+const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRoute, setDetails, setBuilding }) => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'uk' | 'en';
   const [activeTabs, setActiveTabs] = useState<string[]>([]);
@@ -26,6 +27,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
 
   useOnClickOutside(detailsRef, () => {
     setIsClosing(true);
+    setBuilding(null);
   });
 
   useEffect(() => {
@@ -76,7 +78,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
                   {building.name[lang]}
                 </h2>
                 <button
-                  onClick={() => setIsClosing(true)}
+                  onClick={() => {setIsClosing(true); setBuilding(null);} }
                   className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 >
                   <X size={24} className="text-gray-600 dark:text-gray-300" />

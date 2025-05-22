@@ -92,6 +92,7 @@ function App() {
                       onClose={handleClosePanel}
                       onBuildRoute={() => handleBuildRoute(selectedBuilding)}
                       setDetails={setShowDetails}
+                      setBuilding={() => {setSelectedBuilding}}
                     />
                   )}
                   {showRouteDetails && selectedBuilding && showRoute &&(

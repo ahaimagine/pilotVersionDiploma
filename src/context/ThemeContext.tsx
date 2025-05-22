@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, ReactNode } from 'react';
-import useLocalStorage from '../hooks/useLocalStorage';
-import { ThemeMode } from '../types';
+import useLocalStorage from '@hooks/useLocalStorage';
+import { ThemeMode } from '@types';
 
 interface ThemeContextType {
   theme: ThemeMode;
@@ -16,7 +16,6 @@ interface ThemeProviderProps {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setTheme] = useLocalStorage<ThemeMode>('theme', 'light');
 
-  // Apply theme to document
   useEffect(() => {
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(theme);

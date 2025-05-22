@@ -16,13 +16,11 @@ function useRouting({ startPoint, endPoint }: RoutingProps) {
   useEffect(() => {
     if (!map) return;
 
-    // Clean up previous routing control
     if (routingControl) {
       map.removeControl(routingControl);
       setRoutingControl(null);
     }
 
-    // Create new routing if both points are available
     if (startPoint && endPoint) {
       setIsRouting(true);
 
@@ -36,16 +34,17 @@ function useRouting({ startPoint, endPoint }: RoutingProps) {
             { color: '#1E40AF', opacity: 0.8, weight: 6 },
             { color: '#3B82F6', opacity: 0.9, weight: 4 },
           ],
+          extendToWaypoints: true,
+          missingRouteTolerance: 0
         },
         altLineOptions: {
           styles: [
             { color: '#6B7280', opacity: 0.6, weight: 5 },
             { color: '#9CA3AF', opacity: 0.7, weight: 3 },
           ],
-        },
-        createMarker: function() {
-          return null; // Don't create markers for waypoints
-        },
+          extendToWaypoints: true,
+          missingRouteTolerance: 0
+        }
       }).addTo(map);
 
       setRoutingControl(control);

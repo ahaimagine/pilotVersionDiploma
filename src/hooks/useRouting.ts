@@ -36,12 +36,16 @@ function useRouting({ startPoint, endPoint }: RoutingProps) {
             { color: '#1E40AF', opacity: 0.8, weight: 6 },
             { color: '#3B82F6', opacity: 0.9, weight: 4 },
           ],
+          extendToWaypoints: false,
+          missingRouteTolerance: 0
         },
         altLineOptions: {
           styles: [
             { color: '#6B7280', opacity: 0.6, weight: 5 },
             { color: '#9CA3AF', opacity: 0.7, weight: 3 },
           ],
+          extendToWaypoints: false,
+          missingRouteTolerance: 0
         },
         createMarker: function() {
           return null; // Don't create markers for waypoints

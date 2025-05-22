@@ -4,9 +4,11 @@ import i18n from './utils/i18n';
 import Header from './components/UI/Header';
 import CampusMap from './components/Map/MapContainer';
 import DetailPanel from './components/UI/DetailPanel';
+import RoutePanel from './components/UI/RoutePanel';
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { Building } from './types';
+import { AnimatePresence } from 'framer-motion';
 
 // Error Boundary Component
 class ErrorBoundary extends Component<{ children: React.ReactNode }, { hasError: boolean }> {
@@ -32,13 +34,15 @@ function App() {
   const [selectedBuilding, setSelectedBuilding] = useState<Building | null>(null);
   const [showRoute, setShowRoute] = useState(false);
   const [showDetails, setShowDetails] = useState(true);
-  
+  const [showRouteDetails, setShowRouteDetails] = useState(false);
+
 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           console.log('Geolocation permission granted:', position.coords);
+          setShowRouteDetails(true);
         },
         (error) => {
           console.warn('Geolocation permission denied:', error.message);
@@ -81,14 +85,23 @@ function App() {
                   showRoute={showRoute}
                   changeBuild={handleChangeBuilding}
                 />
-                {selectedBuilding && showDetails && (
-                  <DetailPanel
-                    building={selectedBuilding}
-                    onClose={handleClosePanel}
-                    onBuildRoute={() => handleBuildRoute(selectedBuilding)}
-                    setDetails={setShowDetails}
-                  />
-                )}
+                <AnimatePresence>
+                  {selectedBuilding && showDetails && (
+                    <DetailPanel
+                      building={selectedBuilding}
+                      onClose={handleClosePanel}
+                      onBuildRoute={() => handleBuildRoute(selectedBuilding)}
+                      setDetails={setShowDetails}
+                    />
+                  )}
+                  {showRouteDetails && selectedBuilding && showRoute &&(
+                    <RoutePanel
+                      building={selectedBuilding}
+                      onBuildRoute={() => {setShowRouteDetails}}
+                      onCloseRoute={() => {setShowRoute}}
+                    />
+                  )}
+                </AnimatePresence>
               </main>
             </div>
           </LanguageProvider>

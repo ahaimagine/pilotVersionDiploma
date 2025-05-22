@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
-import { Building } from '../../types';
+import { Building } from '@types';
 import BuildingMarkers from './BuildingMarkers';
 import UserLocationMarker from './UserLocationMarker';
-import useGeolocation from '../../hooks/useGeolocation';
-import { CAMPUS_CENTER, DEFAULT_ZOOM } from '../../data/buildings';
+import useGeolocation from '@hooks/useGeolocation';
+import { CAMPUS_CENTER, DEFAULT_ZOOM } from '@data/buildings';
 import { motion } from 'framer-motion';
 import 'leaflet/dist/leaflet.css';
 

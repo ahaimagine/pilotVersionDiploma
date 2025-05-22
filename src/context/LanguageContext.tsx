@@ -1,7 +1,7 @@
 import React, { createContext, useContext, ReactNode, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import useLocalStorage from '../hooks/useLocalStorage';
-import { Language } from '../types';
+import useLocalStorage from '@hooks/useLocalStorage';
+import { Language } from '@types';
 
 interface LanguageContextType {
   language: Language;
@@ -18,7 +18,6 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const { i18n } = useTranslation();
   const [language, setLanguage] = useLocalStorage<Language>('language', 'uk');
 
-  // Apply language
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [language, i18n]);

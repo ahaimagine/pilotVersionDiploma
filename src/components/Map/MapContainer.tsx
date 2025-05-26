@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
 import { Building } from '@types';
 import BuildingMarkers from './BuildingMarkers';
@@ -7,6 +7,8 @@ import useGeolocation from '@hooks/useGeolocation';
 import { CAMPUS_CENTER, DEFAULT_ZOOM } from '@data/buildings';
 import { motion } from 'framer-motion';
 import 'leaflet/dist/leaflet.css';
+import ZoomToBuilding from './ZoomComponent';
+import { useTheme } from '../../context/ThemeContext';
 
 interface CampusMapProps {
   onBuildingSelect: (building: Building) => void;
@@ -23,6 +25,10 @@ const CampusMap: React.FC<CampusMapProps> = ({
 }) => {
   const { location } = useGeolocation();
   const [startPoint, setStartPoint] = useState<[number, number] | null>(null);
+  const { theme } = useTheme();
+  const tileLayerUrl = theme === 'dark'
+    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+    : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
   useEffect(() => {
     if (location) {
@@ -46,10 +52,10 @@ const CampusMap: React.FC<CampusMapProps> = ({
         id="map"
       >
         <TileLayer
-          attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='Map tiles by CartoDB / OSM'
+          url={tileLayerUrl}
         />
-        <ZoomControl position="bottomright" />
+        <ZoomToBuilding building={selectedBuilding} />
 
         <BuildingMarkers
           onBuildingSelect={onBuildingSelect}

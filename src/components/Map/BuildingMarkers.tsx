@@ -3,6 +3,7 @@ import { Marker } from 'react-leaflet';
 import L from 'leaflet';
 import { Building } from '@types';
 import { buildings } from '@data/buildings';
+import { useOnClickOutside } from '@hooks/useOnClickOutside';
 
 const defaultIcon = new L.Icon({
   iconUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png',

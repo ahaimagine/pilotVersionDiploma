@@ -10,8 +10,8 @@ const ZoomToBuilding: React.FC<Props> = ({ building }) => {
     const map = useMap();
 
     useEffect(() => {
-        if (building && building.latitude && building.longitude) {
-            map.flyTo([building.latitude, building.longitude], 18); // або map.setView(..., ...)
+        if (building && building.coordinates[0] && building.coordinates[1]) {
+            map.flyTo([building.coordinates[0], building.coordinates[1]], 18); // або map.setView(..., ...)
         }
     }, [building, map]);
 

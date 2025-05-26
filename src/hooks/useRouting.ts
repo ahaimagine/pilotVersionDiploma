@@ -34,9 +34,7 @@ function useRouting({ startPoint, endPoint }: RoutingProps) {
             { color: '#1E40AF', opacity: 0.8, weight: 6 },
             { color: '#3B82F6', opacity: 0.9, weight: 4 },
           ],
-
           extendToWaypoints: true,
-
           missingRouteTolerance: 0
         },
         altLineOptions: {

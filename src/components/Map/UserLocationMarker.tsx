@@ -18,17 +18,15 @@ const UserLocationMarker: React.FC<UserLocationMarkerProps> = ({
   const map = useMap();
 
   // Custom marker icon for user location
-  const userIcon = new Icon({
+  const userIcon = useMemo(() => new Icon({
     iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-    iconRetinaUrl:
-      'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-    shadowUrl:
-      'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+    iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+    shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     shadowSize: [41, 41],
     className: 'user-location-marker',
-  });
+  }), []);
 
   // Use the `latLng` factory instead of the global `L`
   const startPoint = useMemo<LatLng>(() => {

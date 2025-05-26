@@ -92,14 +92,14 @@ function App() {
                       onClose={handleClosePanel}
                       onBuildRoute={() => handleBuildRoute(selectedBuilding)}
                       setDetails={setShowDetails}
-                      setBuilding={() => {setSelectedBuilding}}
+                      setBuilding={setSelectedBuilding}
                     />
                   )}
-                  {showRouteDetails && selectedBuilding && showRoute &&(
+                  {showRouteDetails && selectedBuilding && showRoute && (
                     <RoutePanel
                       building={selectedBuilding}
-                      onBuildRoute={() => {setShowRouteDetails}}
-                      onCloseRoute={() => {setShowRoute}}
+                      onBuildRoute={() => { setShowRouteDetails }}
+                      onCloseRoute={handleClosePanel}
                     />
                   )}
                 </AnimatePresence>

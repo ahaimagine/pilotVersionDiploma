@@ -1,20 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Building, Department, Institute } from '../../types';
+import { Building, Department, Institute } from '../../../types';
 import { useTranslation } from 'react-i18next';
 import { X, Phone, Mail, Globe, Clock, MapPin, Navigation } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import DropdownList from './DropdownList';
-import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 import { useBuildingsContext } from '@context/BuildingsContext';
+
 
 interface DetailPanelProps {
   building: Building;
   onClose: () => void;
   onBuildRoute: () => void;
   setDetails: (value: boolean) => void;
+  setBuilding: (value: Building | null) => void;
 }
 
-const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRoute, setDetails }) => {
+const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRoute, setDetails, setBuilding }) => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'uk' | 'en';
   const [activeTabs, setActiveTabs] = useState<string[]>([]);
@@ -60,7 +62,6 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
         <motion.div
           className="fixed inset-0 z-[1000] pointer-events-none"
           initial={{ opacity: 0 }}
-          ref={detailsRef}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
@@ -77,7 +78,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
                   {building.name[lang]}
                 </h2>
                 <button
-                  onClick={() => setIsClosing(true)}
+                  onClick={() => {setIsClosing(true); setBuilding(null);} }
                   className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 >
                   <X size={24} className="text-gray-600 dark:text-gray-300" />

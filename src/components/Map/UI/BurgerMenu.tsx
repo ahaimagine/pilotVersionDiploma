@@ -2,9 +2,9 @@ import React, { useState, useRef } from 'react';
 import { Menu, X, Moon, Sun, Languages, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '../../context/ThemeContext';
-import { useLanguage } from '../../context/LanguageContext';
-import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import { useTheme } from '../../../context/ThemeContext';
+import { useLanguage } from '../../../context/LanguageContext';
+import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 import FeedbackForm from './FeedbackForm';
 
 const BurgerMenu: React.FC = () => {

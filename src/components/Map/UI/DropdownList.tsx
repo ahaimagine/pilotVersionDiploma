@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Department, Institute } from '../../types';
+import { Department, Institute } from '../../../types';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';

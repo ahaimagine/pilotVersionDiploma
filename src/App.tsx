@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Component } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './utils/i18n';
-import Header from './components/UI/Header';
+import Header from './components/Map/UI/Header';
 import CampusMap from './components/Map/MapContainer';
-import DetailPanel from './components/UI/DetailPanel';
-import RoutePanel from './components/UI/RoutePanel';
+import DetailPanel from './components/Map/UI/DetailPanel';
+import RoutePanel from './components/Map/UI/RoutePanel';
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { Building } from './types';
@@ -95,13 +95,14 @@ function App() {
                         onClose={handleClosePanel}
                         onBuildRoute={() => handleBuildRoute(selectedBuilding)}
                         setDetails={setShowDetails}
+                        setBuilding={setSelectedBuilding}
                       />
                     )}
                     {showRouteDetails && selectedBuilding && showRoute && (
                       <RoutePanel
                         building={selectedBuilding}
                         onBuildRoute={() => { setShowRouteDetails }}
-                        onCloseRoute={() => { setShowRoute }}
+                        onCloseRoute={handleClosePanel}
                       />
                     )}
                   </AnimatePresence>

@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { Search, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import useSearch from '../../hooks/useSearch';
-import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import useSearch from '../../../hooks/useSearch';
+import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Building } from '../../types';
+import { Building } from '../../../types';
 import { useBuildingsContext } from '@context/BuildingsContext';
 
 interface SearchBarProps {

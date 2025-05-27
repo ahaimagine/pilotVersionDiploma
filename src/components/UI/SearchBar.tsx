@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import useSearch from '../../hooks/useSearch';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import { motion, AnimatePresence } from 'framer-motion';
-import { buildings } from '../../data/buildings';
 import { Building } from '../../types';
+import { useBuildingsContext } from '@context/BuildingsContext';
 
 interface SearchBarProps {
   onBuildingSelect: (building: Building) => void;
@@ -19,7 +19,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onBuildingSelect }) => {
 
   // Close search results when clicked outside
   useOnClickOutside(searchRef, () => setIsActive(false));
-
+   const {institutes, departments, buildings}  = useBuildingsContext();
   const handleSelectItem = (itemId: string, type: string) => {
     if (type === 'building') {
       const building = buildings.find(b => b.id === itemId);

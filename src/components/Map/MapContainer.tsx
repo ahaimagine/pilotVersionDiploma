@@ -4,9 +4,11 @@ import { Building } from '@types';
 import BuildingMarkers from './BuildingMarkers';
 import UserLocationMarker from './UserLocationMarker';
 import useGeolocation from '@hooks/useGeolocation';
-import { CAMPUS_CENTER, DEFAULT_ZOOM } from '@data/buildings';
 import { motion } from 'framer-motion';
 import 'leaflet/dist/leaflet.css';
+
+const CAMPUS_CENTER: [number, number] = [49.8353, 24.0147];
+const DEFAULT_ZOOM = 17;
 
 interface CampusMapProps {
   onBuildingSelect: (building: Building) => void;

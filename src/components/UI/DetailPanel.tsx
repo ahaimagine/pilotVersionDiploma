@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Building, Department, Institute } from '../../types';
-import { departments } from '../../data/departments';
-import { institutes } from '../../data/institutes';
 import { useTranslation } from 'react-i18next';
 import { X, Phone, Mail, Globe, Clock, MapPin, Navigation } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import DropdownList from './DropdownList';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import { useBuildingsContext } from '@context/BuildingsContext';
 
 interface DetailPanelProps {
   building: Building;
@@ -23,6 +22,8 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
 
   const [isClosing, setIsClosing] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
+
+   const {institutes, departments, buildings}  = useBuildingsContext();
 
   useOnClickOutside(detailsRef, () => {
     setIsClosing(true);

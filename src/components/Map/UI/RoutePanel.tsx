@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Building } from '../../types';
+import { Building } from '../../../types';
 import { useTranslation } from 'react-i18next';
 import { X, Navigation } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 
 interface DetailsRoutePanel {
     building: Building;

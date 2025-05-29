@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { FeedbackFormData } from '../../types';
+import { FeedbackFormData } from '../../../types';
 
 interface FeedbackFormProps {
   onClose: () => void;

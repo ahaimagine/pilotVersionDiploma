@@ -1,9 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Building, Department, Institute } from '../types';
-import { buildings } from '../data/buildings';
-import { departments } from '../data/departments';
-import { institutes } from '../data/institutes';
 import { useTranslation } from 'react-i18next';
+import { useBuildingsContext } from '@context/BuildingsContext';
 
 interface SearchItem {
   id: string;
@@ -16,9 +14,11 @@ function useSearch() {
   const [query, setQuery] = useState('');
   const { i18n } = useTranslation();
   const lang = i18n.language as 'uk' | 'en';
-
+  const { institutes, departments, buildings } = useBuildingsContext();
   // Create search items array
   const searchItems = useMemo(() => {
+    if (!buildings || !departments || !institutes) return [];
+
     const items: SearchItem[] = [
       ...buildings.map((building) => ({
         id: building.id,
@@ -40,7 +40,8 @@ function useSearch() {
       })),
     ];
     return items;
-  }, [lang]);
+  }, [lang, buildings, departments, institutes]);
+
 
   // Filter items based on search query
   const results = useMemo(() => {

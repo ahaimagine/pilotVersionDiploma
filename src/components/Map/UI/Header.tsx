@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { MapPin } from 'lucide-react';
 import SearchBar from './SearchBar';
 import BurgerMenu from './BurgerMenu';
-import { Building } from '../../types';
+import { Building } from '../../../types';
 
 interface HeaderProps {
   onBuildingSelect: (building: Building) => void;

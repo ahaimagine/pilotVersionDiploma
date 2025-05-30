@@ -11,17 +11,17 @@ function useBuildings() {
 useEffect(() => {
   const fetchAll = async () => {
     try {
-      const [instRes, deptRes, bldgRes] = await Promise.all([
+      const [bldgRes,instRes, deptRes] = await Promise.all([
+        axios.get<Building[]>("http://localhost:8000/buildings"),
         axios.get<Institute[]>("http://localhost:8000/institutes"),
         axios.get<Department[]>("http://localhost:8000/departments"),
-        axios.get<Building[]>("http://localhost:8000/buildings"),
       ]);
 
       setInstitutes(instRes.data);
       setDepartments(deptRes.data);
       setBuildings(bldgRes.data);
 
-      // Додай ці логи
+      // // Додай ці логи
       console.log("Fetched institutes", instRes.data);
       console.log("Fetched departments", deptRes.data);
       console.log("Fetched buildings", bldgRes.data);

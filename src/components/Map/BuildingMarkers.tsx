@@ -38,10 +38,19 @@ const BuildingMarkers: React.FC<BuildingMarkersProps> = ({
       onBuildingSelect(building);
     }
   };
+if (!buildings || buildings.length === 0) return null;
 
+  const filtered_buildings = buildings.filter(build => 
+    Array.isArray(build.coordinates) && 
+    build.coordinates.length === 2 && 
+    typeof build.coordinates[0] === 'number' && 
+    typeof build.coordinates[1] === 'number' && 
+    !isNaN(build.coordinates[0]) && 
+    !isNaN(build.coordinates[1])
+  );
   return (
     <>
-      {buildings.map((building) => (
+      {filtered_buildings.map((building) => (
         <Marker
           key={building.id}
           position={building.coordinates}

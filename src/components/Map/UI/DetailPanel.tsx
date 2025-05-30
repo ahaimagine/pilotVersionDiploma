@@ -41,11 +41,11 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
   }, [isClosing]);
 
   const buildingDepartments = departments.filter(dept =>
-    building.departments.includes(dept.id)
+    building.departments .includes( dept.buildingId)
   );
 
   const buildingInstitutes = institutes.filter(inst =>
-    building.institutes.includes(inst.id)
+    building.institutes.includes(inst.buildingId)
   );
 
   const handleToggleTab = (tabId: string) => {

@@ -24,23 +24,29 @@ function useRouting({ startPoint, endPoint }: RoutingProps) {
     if (startPoint && endPoint) {
       setIsRouting(true);
 
+      const router = L.Routing.osrmv1({
+        serviceUrl: 'http://localhost:5000/route/v1',
+        profile: 'foot'
+      });
+
       const control = L.Routing.control({
         waypoints: [startPoint, endPoint],
+        router: router,
         routeWhileDragging: true,
-        showAlternatives: true,
+        showAlternatives: false,
         fitSelectedRoutes: true,
         lineOptions: {
           styles: [
             { color: '#1E40AF', opacity: 0.8, weight: 6 },
-            { color: '#3B82F6', opacity: 0.9, weight: 4 },
+            { color: '#3B82F6', opacity: 0.9, weight: 4 }
           ],
           extendToWaypoints: true,
           missingRouteTolerance: 0
         },
         altLineOptions: {
           styles: [
-            { color: '#6B7280', opacity: 0.6, weight: 5 },
-            { color: '#9CA3AF', opacity: 0.7, weight: 3 },
+            { color: '#1E40AF', opacity: 0.8, weight: 6 },
+            { color: '#3B82F6', opacity: 0.9, weight: 4 }
           ],
           extendToWaypoints: true,
           missingRouteTolerance: 0

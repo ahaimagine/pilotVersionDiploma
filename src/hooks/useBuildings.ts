@@ -6,20 +6,23 @@ function useBuildings() {
   const [institutes, setInstitutes] = useState<Institute[] | null>(null);
   const [departments, setDepartments] = useState<Department[] | null>(null);
   const [buildings, setBuildings] = useState<Building[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
 useEffect(() => {
   const fetchAll = async () => {
     try {
+      setIsLoading(true);
       const [bldgRes,instRes, deptRes] = await Promise.all([
-        axios.get<Building[]>("https://backenddiplom4ik-production.up.railway.app/buildings"),
-        axios.get<Institute[]>("https://backenddiplom4ik-production.up.railway.app/institutes"),
-        axios.get<Department[]>("https://backenddiplom4ik-production.up.railway.app/departments"),
+        axios.get<Building[]>("http://localhost:8000/buildings"),
+        axios.get<Institute[]>("http://localhost:8000/institutes"),
+        axios.get<Department[]>("http://localhost:8000/departments"),
       ]);
 
       setInstitutes(instRes.data);
       setDepartments(deptRes.data);
       setBuildings(bldgRes.data);
+      setIsLoading(false);
 
       // // Додай ці логи
       console.log("Fetched institutes", instRes.data);
@@ -34,7 +37,7 @@ useEffect(() => {
   fetchAll();
 }, []);
 
-  return { institutes, departments, buildings, error };
+  return { institutes, departments, buildings, isLoading  };
 }
 
 export default useBuildings;

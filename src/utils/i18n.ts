@@ -33,6 +33,7 @@ const resources = {
       showMore: 'Show More',
       showLess: 'Show Less',
       noResults: 'No results found',
+      loading: "Loading data"
     },
   },
   uk: {
@@ -65,6 +66,7 @@ const resources = {
       showMore: 'Показати більше',
       showLess: 'Показати менше',
       noResults: 'Результатів не знайдено',
+      loading: "Завантажуємо дані"
     },
   },
 };

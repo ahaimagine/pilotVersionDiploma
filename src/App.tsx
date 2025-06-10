@@ -10,7 +10,6 @@ import { LanguageProvider } from './context/LanguageContext';
 import { Building } from './types';
 import { AnimatePresence } from 'framer-motion';
 import { BuildingsProvider } from '@context/BuildingsContext';
-import useBuildings from '@hooks/useBuildings';
 
 // Error Boundary Component
 class ErrorBoundary extends Component<{ children: React.ReactNode }, { hasError: boolean }> {
@@ -33,7 +32,6 @@ class ErrorBoundary extends Component<{ children: React.ReactNode }, { hasError:
 }
 
 function App() {
-  const { institutes, departments, buildings } = useBuildings();
   const [selectedBuilding, setSelectedBuilding] = useState<Building | null>(null);
   const [showRoute, setShowRoute] = useState(false);
   const [showDetails, setShowDetails] = useState(true);

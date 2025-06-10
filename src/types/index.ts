@@ -1,5 +1,5 @@
 export interface Building {
-  id: string;
+  id: number;
   name: {
     uk: string;
     en: string;
@@ -9,54 +9,61 @@ export interface Building {
     uk: string;
     en: string;
   };
-  workingHours: {
+  working_hours: {
     uk: string;
     en: string;
   };
-  contacts: {
-    phone?: string;
-    email?: string;
-    website?: string;
-  };
-  departments: string[]; // department IDs
-  institutes: string[]; // institute IDs
+  phone_number: string;
+  departments: number[]; // department IDs
+  institutes: number[]; // institute IDs
+  original_lpnu_id: number
 }
 
 export interface Department {
-  id: string;
+  id: number;
   name: {
     uk: string;
     en: string;
   };
-  buildingId: string;
+  // buildingId: string;
+  institute_id: number,
+  location: {
+    uk: string,
+    en: string
+  }
   description?: {
     uk: string;
     en: string;
   };
-  contacts?: {
-    phone?: string;
-    email?: string;
-    website?: string;
-  };
+  // contacts?: {
+  //   phone?: string;
+  //   email?: string;
+  //   website?: string;
+  // };
 }
 
 export interface Institute {
-  id: string;
+  id: number;
   name: {
     uk: string;
     en: string;
   };
-  buildingId: string;
+  // buildingId: string;
   description?: {
     uk: string;
     en: string;
   };
-  departments: string[]; // department IDs
-  contacts?: {
-    phone?: string;
-    email?: string;
-    website?: string;
+    location: {
+    uk: string,
+    en: string
   };
+  departments: number[]; // department IDs
+  original_lpnu_id: number;
+  // contacts?: {
+  //   phone?: string;
+  //   email?: string;
+  //   website?: string;
+  // };
 }
 
 export interface FeedbackFormData {

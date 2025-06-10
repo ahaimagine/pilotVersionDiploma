@@ -4,10 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { useBuildingsContext } from '@context/BuildingsContext';
 
 interface SearchItem {
-  id: string;
+  id: number;
   type: 'building' | 'department' | 'institute';
   name: string;
-  buildingId: string;
+  original_lpnu_id?: number;
+  institute_id?: number;
 }
 
 function useSearch() {
@@ -21,27 +22,26 @@ function useSearch() {
 
     const items: SearchItem[] = [
       ...buildings.map((building) => ({
-        id: building.id,
+        id: building.original_lpnu_id,
         type: 'building' as const,
         name: building.name[lang],
-        buildingId: building.id,
+        original_lpnu_id: building.original_lpnu_id,
       })),
       ...departments.map((department) => ({
         id: department.id,
         type: 'department' as const,
         name: department.name[lang],
-        buildingId: department.buildingId,
+        institute_id: department.institute_id,
       })),
       ...institutes.map((institute) => ({
         id: institute.id,
         type: 'institute' as const,
         name: institute.name[lang],
-        buildingId: institute.buildingId,
+        original_lpnu_id: institute.original_lpnu_id,
       })),
     ];
     return items;
   }, [lang, buildings, departments, institutes]);
-
 
   // Filter items based on search query
   const results = useMemo(() => {

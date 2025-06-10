@@ -25,7 +25,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
   const [isClosing, setIsClosing] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
 
-   const {institutes, departments, buildings}  = useBuildingsContext();
+  const { institutes, departments, buildings } = useBuildingsContext();
 
   useOnClickOutside(detailsRef, () => {
     setIsClosing(true);
@@ -40,12 +40,10 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
     }
   }, [isClosing]);
 
-  const buildingDepartments = departments.filter(dept =>
-    building.departments .includes( dept.buildingId)
-  );
-
   const buildingInstitutes = institutes.filter(inst =>
-    building.institutes.includes(inst.buildingId)
+    building.original_lpnu_id == inst.original_lpnu_id)
+  const buildingDepartments = departments.filter(dept =>
+    buildingInstitutes.map(r => r.id).includes(dept.institute_id)
   );
 
   const handleToggleTab = (tabId: string) => {
@@ -78,7 +76,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
                   {building.name[lang]}
                 </h2>
                 <button
-                  onClick={() => {setIsClosing(true); setBuilding(null);} }
+                  onClick={() => { setIsClosing(true); setBuilding(null); }}
                   className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 >
                   <X size={24} className="text-gray-600 dark:text-gray-300" />
@@ -93,22 +91,22 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
               <div className="flex items-start gap-3 mb-[12px] text-gray-700 dark:text-gray-300">
                 <Clock size={18} className="mt-1 flex-shrink-0" />
                 <div>
-                  <p>{building.workingHours[lang]}</p>
+                  <p>{building.working_hours[lang]}</p>
                 </div>
               </div>
 
               <div className="mb-[12px]">
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{t('contacts')}</h3>
                 <div className="space-y-2">
-                  {building.contacts.phone && (
+                  {building.phone_number && (
                     <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
                       <Phone size={18} />
-                      <a href={`tel:${building.contacts.phone}`} className="hover:text-primary-600">
-                        {building.contacts.phone}
+                      <a href={`tel:${building.phone_number}`} className="hover:text-primary-600">
+                        {building.phone_number}
                       </a>
                     </div>
                   )}
-                  {building.contacts.email && (
+                  {/* {building.contacts.email && (
                     <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
                       <Mail size={18} />
                       <a href={`mailto:${building.contacts.email}`} className="hover:text-primary-600">
@@ -123,29 +121,33 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
                         {building.contacts.website.replace('https://', '')}
                       </a>
                     </div>
-                  )}
+                  )} */}
                 </div>
               </div>
+              {buildingInstitutes.length > 0 && (
+                <div className="mt-4 border-t border-gray-300 dark:border-gray-700 pt-4">
+                  <DropdownList
+                    title={t('institutes')}
+                    items={buildingInstitutes}
+                    isActive={activeTabs.includes('institutes')}
+                    onToggle={() => handleToggleTab('institutes')}
+                    lang={lang}
+                  />
+                </div>
+              )}
 
               {buildingDepartments.length > 0 && (
-                <DropdownList
-                  title={t('departments')}
-                  items={buildingDepartments}
-                  isActive={activeTabs.includes('departments')}
-                  onToggle={() => handleToggleTab('departments')}
-                  lang={lang}
-                />
+                <div className="mt-4 border-t border-gray-300 dark:border-gray-700 pt-4">
+                  <DropdownList
+                    title={t('departments')}
+                    items={buildingDepartments}
+                    isActive={activeTabs.includes('departments')}
+                    onToggle={() => handleToggleTab('departments')}
+                    lang={lang}
+                  />
+                </div>
               )}
 
-              {buildingInstitutes.length > 0 && (
-                <DropdownList
-                  title={t('institutes')}
-                  items={buildingInstitutes}
-                  isActive={activeTabs.includes('institutes')}
-                  onToggle={() => handleToggleTab('institutes')}
-                  lang={lang}
-                />
-              )}
 
               <button
                 onClick={onBuildRoute}

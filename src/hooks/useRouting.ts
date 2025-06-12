@@ -25,7 +25,7 @@ function useRouting({ startPoint, endPoint }: RoutingProps) {
       setIsRouting(true);
 
       const router = L.Routing.osrmv1({
-        serviceUrl: 'https://13.60.40.225:5000/route/v1',
+        serviceUrl: 'https://knowwhereinnulpbackend-production.up.railway.app/proxy/osrm',
         profile: 'foot'
       });
 

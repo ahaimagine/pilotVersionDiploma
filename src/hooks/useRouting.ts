@@ -25,7 +25,7 @@ function useRouting({ startPoint, endPoint }: RoutingProps) {
       setIsRouting(true);
 
       const router = L.Routing.osrmv1({
-        serviceUrl: 'http://localhost:5000/route/v1',
+        serviceUrl: 'http://13.60.40.225:5000/route/v1',
         profile: 'foot'
       });
 

@@ -1,4 +1,4 @@
-# Етап 1: Збірка Vite-проєкту
+# 1. Етап: Збірка Vite-проєкту
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -6,18 +6,16 @@ COPY . .
 
 RUN npm install && npm run build
 
-# Етап 2: Сервер через Nginx
-FROM nginx:stable-alpine
+# 2. Етап: Запуск зібраного застосунку через "serve"
+FROM node:20-alpine
 
-# Копіюємо збілджений фронтенд
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Встановлюємо "serve" для обслуговування статичних файлів
+RUN npm install -g serve
 
-# Прибираємо default.conf, щоб не було 404
-RUN rm /etc/nginx/conf.d/default.conf
+# Копіюємо зібраний застосунок
+WORKDIR /app
+COPY --from=builder /app/dist /app/dist
 
-# Додаємо свій nginx конфіг
-COPY nginx.conf /etc/nginx/conf.d/app.conf
+EXPOSE 3000
 
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", "dist", "-l", "3000"]

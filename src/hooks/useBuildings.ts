@@ -14,9 +14,9 @@ useEffect(() => {
     try {
       setIsLoading(true);
       const [bldgRes,instRes, deptRes] = await Promise.all([
-        axios.get<Building[]>("http://knowwhereinnulpbackend-production.up.railway.app/buildings"),
-        axios.get<Institute[]>("http://knowwhereinnulpbackend-production.up.railway.app/institutes"),
-        axios.get<Department[]>("http://knowwhereinnulpbackend-production.up.railway.app/departments"),
+        axios.get<Building[]>("https://knowwhereinnulpbackend-production.up.railway.app/buildings"),
+        axios.get<Institute[]>("https://knowwhereinnulpbackend-production.up.railway.app/institutes"),
+        axios.get<Department[]>("https://knowwhereinnulpbackend-production.up.railway.app/departments"),
       ]);
 
       setInstitutes(instRes.data);

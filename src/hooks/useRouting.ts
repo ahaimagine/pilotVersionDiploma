@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { useMap } from 'react-leaflet';
@@ -10,67 +10,63 @@ interface RoutingProps {
 
 function useRouting({ startPoint, endPoint }: RoutingProps) {
   const map = useMap();
-  const [routingControl, setRoutingControl] = useState<L.Routing.Control | null>(null);
   const [isRouting, setIsRouting] = useState(false);
+  const routingControlRef = useRef<L.Routing.Control | null>(null);
+
+  // Очистити маршрут
+  const removeRoutingControl = () => {
+    if (routingControlRef.current) {
+      map.removeControl(routingControlRef.current);
+      routingControlRef.current = null;
+      setIsRouting(false);
+    }
+  };
 
   useEffect(() => {
     if (!map) return;
 
-    if (routingControl) {
-      map.removeControl(routingControl);
-      setRoutingControl(null);
+    if (!startPoint || !endPoint) {
+      removeRoutingControl();
+      return;
     }
 
-    if (startPoint && endPoint) {
-      setIsRouting(true);
+    map.whenReady(() => {
+      if (routingControlRef.current) {
+        routingControlRef.current.setWaypoints([startPoint, endPoint]);
+      } else {
+        const control = L.Routing.control({
+          waypoints: [startPoint, endPoint],
+          routeWhileDragging: true,
+          showAlternatives: false,
+          fitSelectedRoutes: false, // зум самі робимо
+          router: L.Routing.osrmv1({
+            serviceUrl: 'https://knowwhereinnulpbackend-production.up.railway.app/proxy/osrm',
+            profile: 'foot',
+          }),
+          lineOptions: {
+            styles: [
+              { color: '#1E40AF', opacity: 0.8, weight: 6 },
+              { color: '#3B82F6', opacity: 0.9, weight: 4 },
+            ],
+          },
+        }).addTo(map);
 
-      const router = L.Routing.osrmv1({
-        serviceUrl: 'https://knowwhereinnulpbackend-production.up.railway.app/proxy/osrm',
-        profile: 'foot'
-      });
+        control.on('routesfound', (e: any) => {
+          const route = e.routes?.[0];
+          if (route?.bounds?.isValid?.()) {
+            map.fitBounds(route.bounds, { padding: [50, 50] });
+          }
+        });
 
-      const control = L.Routing.control({
-        waypoints: [startPoint, endPoint],
-        router: router,
-        routeWhileDragging: true,
-        showAlternatives: false,
-        fitSelectedRoutes: true,
-        lineOptions: {
-          styles: [
-            { color: '#1E40AF', opacity: 0.8, weight: 6 },
-            { color: '#3B82F6', opacity: 0.9, weight: 4 }
-          ],
-          extendToWaypoints: true,
-          missingRouteTolerance: 0
-        },
-        altLineOptions: {
-          styles: [
-            { color: '#1E40AF', opacity: 0.8, weight: 6 },
-            { color: '#3B82F6', opacity: 0.9, weight: 4 }
-          ],
-          extendToWaypoints: true,
-          missingRouteTolerance: 0
-        }
-      }).addTo(map);
-
-      setRoutingControl(control);
-    } else {
-      setIsRouting(false);
-    }
-
-    return () => {
-      if (routingControl) {
-        map.removeControl(routingControl);
+        routingControlRef.current = control;
       }
-    };
+
+      setIsRouting(true);
+    });
   }, [map, startPoint, endPoint]);
 
   const clearRoute = () => {
-    if (routingControl) {
-      map.removeControl(routingControl);
-      setRoutingControl(null);
-      setIsRouting(false);
-    }
+    removeRoutingControl();
   };
 
   return { isRouting, clearRoute };

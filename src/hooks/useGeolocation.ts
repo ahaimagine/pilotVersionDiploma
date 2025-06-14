@@ -4,6 +4,7 @@ interface GeolocationState {
   location: { lat: number; lng: number } | null;
   error: string | null;
   loading: boolean;
+  permissionPrompt: boolean; // показати повідомлення про дозвіл
 }
 
 function useGeolocation(): GeolocationState {
@@ -11,15 +12,20 @@ function useGeolocation(): GeolocationState {
     location: null,
     error: null,
     loading: true,
+    permissionPrompt: false,
   });
 
   useEffect(() => {
+    let watchId: number;
+
+    // Перевірка доступності геолокації
     if (!navigator.geolocation) {
-      setState((prev) => ({
-        ...prev,
-        error: 'Geolocation is not supported by your browser',
+      setState({
+        location: null,
+        error: 'Геолокація не підтримується вашим браузером',
         loading: false,
-      }));
+        permissionPrompt: false,
+      });
       return;
     }
 
@@ -31,6 +37,7 @@ function useGeolocation(): GeolocationState {
         },
         error: null,
         loading: false,
+        permissionPrompt: false,
       });
     };
 
@@ -39,23 +46,74 @@ function useGeolocation(): GeolocationState {
         location: null,
         error: error.message,
         loading: false,
+        permissionPrompt: false,
       });
     };
 
-    const options: PositionOptions = {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 60000,
+    const requestLocation = () => {
+      const options: PositionOptions = {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 60000,
+      };
+
+      watchId = navigator.geolocation.watchPosition(
+        successHandler,
+        errorHandler,
+        options
+      );
     };
 
-    const watchId = navigator.geolocation.watchPosition(
-      successHandler,
-      errorHandler,
-      options
-    );
+    // Використовуємо Permissions API, якщо є
+    if ('permissions' in navigator) {
+      navigator.permissions
+        .query({ name: 'geolocation' as PermissionName })
+        .then((result) => {
+          if (result.state === 'granted') {
+            setState((prev) => ({ ...prev, permissionPrompt: false }));
+            requestLocation();
+          } else if (result.state === 'prompt') {
+            setState((prev) => ({ ...prev, permissionPrompt: true }));
+            requestLocation();
+          } else {
+            setState({
+              location: null,
+              error: 'Доступ до геолокації заборонено.',
+              loading: false,
+              permissionPrompt: false,
+            });
+          }
+
+          // Додаємо слухач змін дозволу (опціонально)
+          result.onchange = () => {
+            if (result.state === 'granted') {
+              setState((prev) => ({ ...prev, permissionPrompt: false }));
+              requestLocation();
+            } else if (result.state === 'denied') {
+              setState({
+                location: null,
+                error: 'Користувач заборонив доступ до геолокації.',
+                loading: false,
+                permissionPrompt: false,
+              });
+            }
+          };
+        })
+        .catch(() => {
+          // fallback, якщо помилка при доступі до Permissions API
+          setState((prev) => ({ ...prev, permissionPrompt: true }));
+          requestLocation();
+        });
+    } else {
+      // Fallback для старих браузерів
+      setState((prev) => ({ ...prev, permissionPrompt: true }));
+      requestLocation();
+    }
 
     return () => {
-      navigator.geolocation.clearWatch(watchId);
+      if (watchId) {
+        navigator.geolocation.clearWatch(watchId);
+      }
     };
   }, []);
 

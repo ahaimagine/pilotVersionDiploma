@@ -34,7 +34,16 @@ const resources = {
       showLess: 'Show Less',
       noResults: 'No results found',
       loading: "Loading data",
-      route: "Route"
+      route: "Route",
+      geolocation: {
+        title: "Location Access",
+        message: "This app uses your location to build routes. Please allow access to your location in the browser settings.",
+        notSupported: "Your browser does not support geolocation.",
+        denied: "You denied the location access request. To allow it, change your browser settings.",
+        genericError: "Error: {{error}}",
+        waiting: "Waiting for location access...",
+        allow: "Allow Access"
+      }
     },
   },
   uk: {
@@ -68,7 +77,16 @@ const resources = {
       showLess: 'Показати менше',
       noResults: 'Результатів не знайдено',
       loading: "Завантажуємо дані",
-      route:"Маршрут"
+      route: "Маршрут",
+      geolocation: {
+        title: "Доступ до геолокації",
+        message: "Цей додаток використовує ваше місцезнаходження для побудови маршрутів. Будь ласка, дозвольте доступ до геолокації у налаштуваннях браузера.",
+        notSupported: "Ваш браузер не підтримує геолокацію.",
+        denied: "Ви відхилили запит на доступ до геолокації. Щоб дозволити, змініть налаштування браузера.",
+        genericError: "Помилка: {{error}}",
+        waiting: "Очікуємо доступ до геолокації...",
+        allow: "Дати доступ"
+      }
     },
   },
 };

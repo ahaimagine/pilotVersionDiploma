@@ -5,13 +5,13 @@ import Header from './components/Map/UI/Header';
 import CampusMap from './components/Map/MapContainer';
 import DetailPanel from './components/Map/UI/DetailPanel';
 import RoutePanel from './components/Map/UI/RoutePanel';
+import GeolocationPrompt from './components/Map/UI/GeolocationPrompt'; // ✅ виправлена назва
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { Building } from './types';
 import { AnimatePresence } from 'framer-motion';
 import { BuildingsProvider } from '@context/BuildingsContext';
 
-// Error Boundary Component
 class ErrorBoundary extends Component<{ children: React.ReactNode }, { hasError: boolean }> {
   state = { hasError: false };
 
@@ -36,6 +36,7 @@ function App() {
   const [showRoute, setShowRoute] = useState(false);
   const [showDetails, setShowDetails] = useState(true);
   const [showRouteDetails, setShowRouteDetails] = useState(false);
+  const [showGeoPrompt, setShowGeoPrompt] = useState(false);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -46,10 +47,12 @@ function App() {
         },
         (error) => {
           console.warn('Geolocation permission denied:', error.message);
+          setShowGeoPrompt(true);
         }
       );
     } else {
       console.warn('Geolocation not supported.');
+      setShowGeoPrompt(true);
     }
   }, []);
 
@@ -86,6 +89,7 @@ function App() {
                     showRoute={showRoute}
                     changeBuild={handleChangeBuilding}
                   />
+
                   <AnimatePresence>
                     {selectedBuilding && showDetails && (
                       <DetailPanel
@@ -99,9 +103,12 @@ function App() {
                     {showRouteDetails && selectedBuilding && showRoute && (
                       <RoutePanel
                         building={selectedBuilding}
-                        onBuildRoute={() => { setShowRouteDetails }}
+                        onBuildRoute={() => setShowRouteDetails(true)}
                         onCloseRoute={handleClosePanel}
                       />
+                    )}
+                    {showGeoPrompt && (
+                      <GeolocationPrompt onClose={() => setShowGeoPrompt(false)} />
                     )}
                   </AnimatePresence>
                 </main>

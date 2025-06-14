@@ -45,7 +45,7 @@ const DetailsRoute: React.FC<DetailsRoutePanel> = ({ building, onBuildRoute, onC
                                 <div className="relative border rounded-xl px-4 py-3 flex items-center gap-3 text-gray-700 dark:text-gray-300">
                                     <Navigation className="w-5 h-5 text-indigo-600" />
                                     {/* Add back */}
-                                    <span className="text-sm">{t('Ваше місцезнаходження')}</span>
+                                    <span className="text-sm">{t('yourLocation')}</span>
                                 </div>
 
                                 <button

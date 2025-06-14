@@ -90,9 +90,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onBuildingSelect }) => {
                   >
                     <div className="flex-1">
                       <p className="font-medium">{item.name}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
+                      {/* <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
                         {t(item.type)}
-                      </p>
+                      </p> */}
                     </div>
                   </button>
                 </li>

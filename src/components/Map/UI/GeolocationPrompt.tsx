@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { X } from 'lucide-react';
 
 interface GeolocationPromptProps {
   onClose: () => void;
@@ -62,6 +63,13 @@ const GeolocationPrompt: React.FC<GeolocationPromptProps> = ({ onClose }) => {
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">
             {t('geolocation.title')}
           </h2>
+                    <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-800 dark:hover:text-white transition-colors"
+            aria-label="Close"
+          >
+            <X size={20} />
+          </button>
         </div>
 
         <div className="p-4 space-y-4">
@@ -85,7 +93,7 @@ const GeolocationPrompt: React.FC<GeolocationPromptProps> = ({ onClose }) => {
             <button
               onClick={handleRequestAccess}
               disabled={loading}
-              className="px-4 py-2 bg-[#2D318D] hover:bg-[#4A4EB1] dark:bg-[#8287FF] text-white rounded-lg transition-colors disabled:opacity-50"
+              className="w-full px-4 py-2 bg-[#2D318D] hover:bg-[#4A4EB1] dark:bg-[#8287FF] text-white rounded-lg transition-colors disabled:opacity-50"
             >
               {t('geolocation.allow')}
             </button>

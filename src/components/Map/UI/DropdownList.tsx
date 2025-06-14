@@ -54,7 +54,9 @@ const DropdownList: React.FC<DropdownListProps> = ({
                 <li key={item.id} className="pl-3 border-l-2 border-primary-300 dark:border-primary-700">
                   <div className="flex justify-between font-medium text-gray-900 dark:text-white">
                     <span>{item.name[lang]}</span>
-                    <span className="whitespace-nowrap">{item?.location[lang]}</span>
+                    <span className="whitespace-nowrap">
+                      {item?.location?.[lang] ? (lang === 'uk' ? 'К.' : 'R.') : ''}{item?.location?.[lang] ?? ''}
+                    </span>
                   </div>
                 </li>
               ))}

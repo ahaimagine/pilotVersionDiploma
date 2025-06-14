@@ -7,8 +7,7 @@ interface SearchItem {
   id: number;
   type: 'building' | 'department' | 'institute';
   name: string;
-  original_lpnu_id?: number;
-  institute_id?: number;
+  original_lpnu_id: number;
 }
 
 function useSearch() {
@@ -31,7 +30,7 @@ function useSearch() {
         id: department.id,
         type: 'department' as const,
         name: department.name[lang],
-        institute_id: department.institute_id,
+        original_lpnu_id: department.original_lpnu_id,
       })),
       ...institutes.map((institute) => ({
         id: institute.id,

@@ -43,7 +43,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ building, onClose, onBuildRou
   const buildingInstitutes = institutes.filter(inst =>
     building.original_lpnu_id == inst.original_lpnu_id)
   const buildingDepartments = departments.filter(dept =>
-    buildingInstitutes.map(r => r.id).includes(dept.institute_id)
+    building.original_lpnu_id==dept.original_lpnu_id
   );
 
   const handleToggleTab = (tabId: string) => {

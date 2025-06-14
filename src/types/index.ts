@@ -27,6 +27,7 @@ export interface Department {
   };
   // buildingId: string;
   institute_id: number,
+  original_lpnu_id: number,
   location: {
     uk: string,
     en: string

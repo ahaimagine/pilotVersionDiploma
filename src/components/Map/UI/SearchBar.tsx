@@ -21,6 +21,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onBuildingSelect }) => {
   useOnClickOutside(searchRef, () => setIsActive(false));
   const { institutes, departments, buildings } = useBuildingsContext();
   const handleSelectItem = (item: any, type: string) => {
+    console.log(item)
     if (type === 'building') {
       const building = buildings.find(b => b.original_lpnu_id === item.original_lpnu_id);
       if (building) {
@@ -39,15 +40,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onBuildingSelect }) => {
     }
 
     if (type === 'department') {
-      const intitude = institutes.find(i => i.id == item.institute_id)
-
-      if (intitude) {
-        const building = buildings.find(b => b.original_lpnu_id === intitude.original_lpnu_id);
-        if (building) {
-          onBuildingSelect(building);
-          setQuery('');
-          setIsActive(false);
-        }
+      const building = buildings.find(b => b.original_lpnu_id === item.original_lpnu_id);
+      if (building) {
+        onBuildingSelect(building);
+        setQuery('');
+        setIsActive(false);
       }
 
     }
@@ -85,7 +82,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onBuildingSelect }) => {
             className="absolute z-10 mt-1 w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 max-h-60 overflow-y-auto"
           >
             <ul>
-              {results.map((item ,index) => (
+              {results.map((item, index) => (
                 <li key={index}>
                   <button
                     onClick={() => handleSelectItem(item, item.type)}

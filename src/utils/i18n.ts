@@ -22,7 +22,7 @@ const resources = {
       workingHours: 'Working Hours',
       contacts: 'Contacts',
       buildRoute: 'Build Route',
-      yourLocation: 'Your route',
+      yourLocation: 'Your Location',
       permissionDenied: 'Location permission denied',
       permissionPrompt: 'Please allow location access for routing',
       feedbackForm: 'Feedback Form',
@@ -34,6 +34,7 @@ const resources = {
       showLess: 'Show Less',
       noResults: 'No results found',
       loading: "Loading data",
+      route: "Route"
     },
   },
   uk: {
@@ -55,7 +56,7 @@ const resources = {
       workingHours: 'Графік роботи',
       contacts: 'Контакти',
       buildRoute: 'Побудувати маршрут',
-      yourLocation: 'Ваш маршут',
+      yourLocation: 'Ваше місцезнаходження',
       permissionDenied: 'Доступ до місцезнаходження відхилено',
       permissionPrompt: 'Будь ласка, дозвольте доступ до місцезнаходження для прокладання маршруту',
       feedbackForm: 'Форма зворотного зв\'язку',
@@ -67,6 +68,7 @@ const resources = {
       showLess: 'Показати менше',
       noResults: 'Результатів не знайдено',
       loading: "Завантажуємо дані",
+      route:"Маршрут"
     },
   },
 };

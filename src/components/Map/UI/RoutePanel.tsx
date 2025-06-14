@@ -35,7 +35,7 @@ const DetailsRoute: React.FC<DetailsRoutePanel> = ({ building, onBuildRoute, onC
                     >
                         <div className="p-4">
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-lg font-semibold">{t('Маршрут')}</h2>
+                                <h2 className="text-lg font-semibold">{t('route')}</h2>
                                 <button onClick={() => { setOnClose(true); onCloseRoute() }}>
                                     <X className="w-5 h-5 text-gray-500" />
                                 </button>

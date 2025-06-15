@@ -38,7 +38,7 @@ function useRouting({ startPoint, endPoint }: RoutingProps) {
           waypoints: [startPoint, endPoint],
           routeWhileDragging: true,
           showAlternatives: false,
-          fitSelectedRoutes: false, // зум самі робимо
+          fitSelectedRoutes: false,
           router: L.Routing.osrmv1({
             serviceUrl: 'https://knowwhereinnulpbackend-production.up.railway.app/proxy/osrm',
             profile: 'foot',

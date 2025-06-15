@@ -5,7 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const resources = {
   en: {
     translation: {
-      appName: 'Know Where in NULP',
+      appName: 'Know Where at NULP',
       search: 'Search buildings, departments...',
       darkMode: 'Dark Mode',
       lightMode: 'Light Mode',

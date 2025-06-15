@@ -24,14 +24,33 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onClose }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Feedback submitted:', formData);
-    // In a real app, you would send this to a server
-    setIsSubmitted(true);
-    setTimeout(() => {
-      onClose();
-    }, 2000);
+
+    try {
+      const response = await fetch(
+        'https://knowwhereinnulpbackend-production.up.railway.app/sendmail',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to send feedback');
+      }
+
+      setIsSubmitted(true);
+      setTimeout(() => {
+        onClose();
+      }, 2000);
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      alert(t('feedbackError') || 'Something went wrong. Please try again later.');
+    }
   };
 
   return (

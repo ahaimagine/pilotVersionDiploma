@@ -5,7 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const resources = {
   en: {
     translation: {
-      appName: 'Know Where in NULP',
+      appName: 'Know Where at NULP',
       search: 'Search buildings, departments...',
       darkMode: 'Dark Mode',
       lightMode: 'Light Mode',
@@ -35,6 +35,7 @@ const resources = {
       noResults: 'No results found',
       loading: "Loading data",
       route: "Route",
+      feedbackError: "An error occurred while sending.",
       geolocation: {
         title: "Location Access",
         message: "This app uses your location to build routes. Please allow access to your location in the browser settings.",
@@ -78,6 +79,7 @@ const resources = {
       noResults: 'Результатів не знайдено',
       loading: "Завантажуємо дані",
       route: "Маршрут",
+      feedbackError: "Виникла помилка під час відправки.",
       geolocation: {
         title: "Доступ до геолокації",
         message: "Цей додаток використовує ваше місцезнаходження для побудови маршрутів. Будь ласка, дозвольте доступ до геолокації у налаштуваннях браузера.",
